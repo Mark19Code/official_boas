@@ -1,3 +1,8 @@
+async function getBookedTimes(date) {
+  const res = await fetch(`http://localhost:3000/api/booked-times?date=${date}`);
+  return await res.json(); // returns ["10:00 AM", "2:00 PM"]
+}
+
 /* ================= LANGUAGE ================= */
 function setLanguage(lang){
   localStorage.setItem("language", lang);
@@ -73,18 +78,24 @@ document.addEventListener("DOMContentLoaded", () => {
     btn.textContent = d.getDate();
     btn.dataset.date = d.toDateString();
 
-    btn.onclick = () => {
-      document.querySelectorAll(".day").forEach(b => b.classList.remove("selected"));
-      btn.classList.add("selected");
-      selectedDate = btn.dataset.date;
-      console.log("DEBUG: Date selected:", selectedDate);
-    };
+   btn.onclick = async () => {
+  document.querySelectorAll(".day").forEach(b => b.classList.remove("selected"));
+  btn.classList.add("selected");
+
+  selectedDate = d.toISOString().split("T")[0];
+  console.log("DEBUG: Date selected:", selectedDate);
+
+  fullyBookedTimes = await getBookedTimes(selectedDate);
+  renderTimes();
+};
+
 
     calendar.appendChild(btn);
   }
 
   /* ===== TIME SLOTS ===== */
-  const fullyBooked = ["10:00 AM", "2:00 PM"];
+  let fullyBookedTimes = [];
+
 
   for(let hour = 8; hour <= 18; hour++){
     const h = hour > 12 ? hour - 12 : hour;
@@ -111,18 +122,17 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* ===== CONTINUE ===== */
-  nextBtn.onclick = () => {
-    if(!selectedDate || !selectedTime){
-      alert("Please select date and time");
-      return;
-    }
-
-    localStorage.setItem("appointmentDate", selectedDate);
-    localStorage.setItem("appointmentTime", selectedTime);
-    console.log("DEBUG: Date and time saved:", selectedDate, selectedTime);
-    window.location.href = "receipt.html";
-  };
+ await fetch("http://localhost:3000/api/book", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    name: user.name,
+    service,
+    date: selectedDate,
+    time: selectedTime
+  })
 });
+
 
 function loadReceipt(){
   console.log("DEBUG: loadReceipt function started");
@@ -168,4 +178,38 @@ function printReceipt(){
 function newBooking(){
   localStorage.clear();
   console.log("DEBUG: localStorage cleared");
+}
+
+function renderTimes() {
+  timeGrid.innerHTML = "";
+
+  for (let hour = 8; hour <= 17; hour++) {
+    const display = hour > 12 ? hour - 12 : hour;
+    const period = hour >= 12 ? "PM" : "AM";
+    const label = `${display}:00 ${period}`;
+
+    const btn = document.createElement("button");
+    btn.className = "time";
+    btn.textContent = label;
+
+    if (fullyBookedTimes.includes(label)) {
+      btn.classList.add("disabled");
+      btn.disabled = true;
+    } else {
+      btn.onclick = () => {
+        document.querySelectorAll(".time").forEach(t => t.classList.remove("selected"));
+        btn.classList.add("selected");
+        selectedTime = label;
+      };
+    }
+
+    timeGrid.appendChild(btn);
+  }
+}
+
+async function getBookedTimes(date) {
+  const res = await fetch(
+    `http://localhost:3000/api/booked-times?date=${date}`
+  );
+  return await res.json();
 }
