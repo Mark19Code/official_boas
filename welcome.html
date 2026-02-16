@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Welcome</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="gradient-bg">
+ <img src="brgy.png" alt="Barangay Connect Logo" class="logo fade-in">
+
+<div class="center-card fade-in">
+  <h1 id="welcomeTitle">Welcome!</h1>
+  <h2 class="subtitle">Barangay Online Appointment System</h2>
+
+  <p class="intro-text" id="welcomeDesc">
+    Book your barangay appointments online. Fast, easy, and convenient for all residents.
+  </p>
+
+  <div class="features">
+    <div class="feature-box">
+      <h4>📅 Easy Scheduling</h4>
+      <p>Choose your preferred date and time.</p>
+    </div>
+
+    <div class="feature-box">
+      <h4>🚫 No Waiting</h4>
+      <p>Skip long lines at the barangay hall.</p>
+    </div>
+
+    <div class="feature-box">
+      <h4>⚡ Quick Process</h4>
+      <p>Get your documents faster and hassle-free.</p>
+    </div>
+    <div class="feature-box feature-interactive">
+  <h4>🔒 Secure</h4>
+  <p>Your information is protected and handled by the barangay.</p>
+</div>
+
+
+  </div>
+
+  <p class="trust-text">Secure • Official • Free Services</p>
+
+  <a href="ticket.html" class="primary-btn">Start Appointment</a>
+</div>
+
+
+<script src="script.js"></script>
+<script>
+document.getElementById("welcomeTitle").innerText =
+t("Welcome to Barangay Connect",
+  "Maligayang Pagdating sa Barangay Connect");
+
+document.getElementById("welcomeDesc").innerText =
+t("Book your barangay services online easily.",
+  "Mag-book ng serbisyo ng barangay online nang madali.");
+</script>
+</body>
+</html>

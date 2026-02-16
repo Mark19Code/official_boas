@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Select Service</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="gradient-bg">
+ <img src="brgy.png" alt="Barangay Connect Logo" class="logo fade-in">
+ <div class="steps">
+  <div class="step done">✓</div>
+  <div class="line"></div>
+  <div class="step done">2</div>
+  <div class="line"></div>
+  <div class="step active">3</div>
+  <div class="line"></div>
+  <div class="step">4</div>
+</div>
+
+
+<div class="center-card fade-in service-page">
+  <h2>Select Service</h2>
+  <p class="intro-text">
+    Choose the barangay service you need. Each request will be prepared
+    based on your selected document type.
+  </p>
+
+  <a href="schedule.html" class="service-card" onclick="selectService('Barangay Certificate','BC')">
+    📄 Barangay Certificate
+  </a>
+
+  <a href="schedule.html" class="service-card" onclick="selectService('Barangay Clearance','CL')">
+    🛂 Barangay Clearance
+  </a>
+
+  <a href="schedule.html" class="service-card" onclick="selectService('Certificate of Indigency','CI')">
+    📑 Certificate of Indigency
+  </a>
+
+  <a href="schedule.html" class="service-card" onclick="selectService('Residency Certificate','RC')">
+    🏠 Residency Certificate
+  </a>
+
+  <a href="schedule.html" class="service-card" onclick="selectService('Business Clearance','BC')">
+    🏪 Business Clearance
+  </a>
+</div>
+
+
+<script src="script.js"></script>
+</body>
+</html>

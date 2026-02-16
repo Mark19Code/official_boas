@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Receipt</title>
+<link rel="stylesheet" href="style.css">
+<img src="brgy.png" alt="Barangay Connect Logo" class="logo fade-in">
+</head>
+<body class="gradient-bg" onload="loadReceipt()">
+    <div class="steps">
+  <div class="step done">✓</div>
+  <div class="line"></div>
+  <div class="step done">✓</div>
+  <div class="line"></div>
+  <div class="step active">✓</div>
+  <div class="line"></div>
+  <div class="step">4</div>
+</div>
+
+
+<div class="center-card fade-in" style="position: relative;">
+
+  <!-- FLOATING SUCCESS -->
+  <img src="confirmed.png" class="confirmed-icon">
+ <h1>Appointment Confirmed!</h1>
+  <h2 id="receiptTitle"></h2>
+
+<div id="receiptDetails"></div>
+<p class="trust-text">
+Please bring this receipt when visiting the barangay office.
+This serves as your official appointment confirmation.
+</p>
+
+
+<button onclick="window.print()" class="primary-btn">Print</button>
+<a href="index.html" onclick="newBooking()" class="secondary-btn">New Appointment</a>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

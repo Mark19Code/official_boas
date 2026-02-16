@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Barangay Connect</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="gradient-bg">
+<img src="brgy.png" alt="Barangay Connect Logo" class="logo fade-in">
+
+<div class="center-card">
+    <h1 class="main-title">Barangay Online</h1>
+    <h2 class="subtitle">Appointment System</h2>
+
+    <h3 class="subbody">Choose Your Language</h3>
+    <h4 class="body">Piliin ang iyong Wika</h4>
+
+    <a href="welcome.html" class="lang-card" onclick="setLanguage('en')">
+      <div class="lang-left">
+        <img src="us.png" alt="US flag for English" class="flag" onerror="this.style.display='none'; this.nextSibling.style.display='block';">
+        <span style="display:none; font-size:26px; font-weight:800; color:#111827;">US</span> 
+      </div>
+      <div class="lang-middle">
+        <h3>English</h3>
+        <p>Continue in English</p>
+      </div>  
+      <div class="lang-right">›</div> 
+    </a>
+
+    <a href="welcome.html" class="lang-card" onclick="setLanguage('fil')">
+      <div class="lang-left">
+        <img src="ph.png" alt="Philippine Flag for Filipino" class="flag" onerror="this.style.display='none'; this.nextSibling.style.display='block';">
+        <span style="display:none; font-size:26px; font-weight:800; color:#111827;">PH</span> 
+      </div>
+      <div class="lang-middle">
+        <h3>Filipino</h3>
+        <p>Magpatuloy sa Filipino</p>
+      </div>
+      <div class="lang-right">›</div> 
+    </a>
+
+    <p class="intro-text">
+    A fast and convenient way to book barangay services online.<br>
+    Official. Secure. Free for all residents.</p>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

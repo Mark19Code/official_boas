@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Schedule</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="gradient-bg">
+
+<img src="brgy.png" alt="Barangay Connect Logo" class="logo fade-in">
+
+<!-- STEP INDICATOR -->
+<div class="steps">
+  <div class="step done">✓</div>
+  <div class="line"></div>
+  <div class="step done">✓</div>
+  <div class="line"></div>
+  <div class="step active">3</div>
+  <div class="line"></div>
+  <div class="step">4</div>
+</div>
+
+<div class="schedule-container">
+  <div class="header-text">
+    <h1>Choose Date & Time</h1>
+    <p>Select your preferred appointment schedule</p>
+  </div>
+
+  <div class="schedule-wrapper">
+    <!-- DATE -->
+    <div class="card">
+      <h3 id="monthLabel">Loading...</h3>  <!-- Dynamic month/year -->
+      <div id="calendarDays" class="calendar"></div>  <!-- Dynamic days -->
+    </div>
+
+    <!-- TIME -->
+    <div class="card">
+      <h3>⏰ Select Time</h3>
+      <div id="timeSlots" class="time-grid"></div>  <!-- Dynamic time slots -->
+      <p class="office">Office Hours: 8:00 AM – 5:00 PM</p>
+    </div>
+  </div>
+
+  <!-- ACTION BUTTONS -->
+  <div class="actions">
+    <a href="service.html" class="btn back">← Back</a>
+    <a href="#" class="btn next">Continue →</a>  <!-- JS handles click -->
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

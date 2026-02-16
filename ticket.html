@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Personal Info</title>
+<link rel="stylesheet" href="style.css">
+<img src="brgy.png" alt="Barangay Connect Logo" class="logo fade-in">
+</head>
+<body class="gradient-bg ticket-page">
+    <div class="steps">
+  <div class="step done">1</div>
+  <div class="line"></div>
+  <div class="step done">2</div>
+  <div class="line"></div>
+  <div class="step active">3</div>
+  <div class="line"></div>
+  <div class="step">4</div>
+</div>
+
+
+<div class="center-card fade-in">
+<h2>Personal Information</h2>
+<p class="intro-text">
+Please provide your basic details to process your barangay request accurately.
+Your information will be kept secure and confidential.
+</p>
+
+<form onsubmit="saveTicket(event)">
+  <input type="text" id="name" placeholder="Full Name" required>
+  <input type="number" id="age" placeholder="Age" required>
+  <input type="text" id="address" placeholder="Address" required>
+  <input type="email" id="email" placeholder="Email Address" required>
+  <button type="submit" class="primary-btn">Continue</button>
+</form>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
