@@ -6,8 +6,9 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body class="gradient-bg">
-
+<a href="index.html">
 <img src="brgy.png" alt="Barangay Connect Logo" class="logo fade-in">
+</a>
 
 <!-- STEP INDICATOR -->
 <div class="steps">
@@ -22,21 +23,21 @@
 
 <div class="schedule-container">
   <div class="header-text">
-    <h1>Choose Date & Time</h1>
-    <p>Select your preferred appointment schedule</p>
+    <h1 id="scheduleTitle"></h1>
+<p id="scheduleDesc"></p>
   </div>
 
   <div class="schedule-wrapper">
     <!-- DATE -->
     <div class="card">
-      <h3 id="monthLabel">Loading...</h3>  <!-- Dynamic month/year -->
-      <div id="calendarDays" class="calendar"></div>  <!-- Dynamic days -->
+      <h3 id="monthLabel">Loading...</h3>  
+      <div id="calendarDays" class="calendar"></div>  
     </div>
 
     <!-- TIME -->
     <div class="card">
       <h3>⏰ Select Time</h3>
-      <div id="timeSlots" class="time-grid"></div>  <!-- Dynamic time slots -->
+      <div id="timeSlots" class="time-grid"></div>  
       <p class="office">Office Hours: 8:00 AM – 5:00 PM</p>
     </div>
   </div>
@@ -44,10 +45,29 @@
   <!-- ACTION BUTTONS -->
   <div class="actions">
     <a href="service.html" class="btn back">← Back</a>
-    <a href="#" class="btn next">Continue →</a>  <!-- JS handles click -->
+    <a href="#" class="btn next">Continue →</a> 
   </div>
 </div>
 
 <script src="script.js"></script>
+<script>
+document.getElementById("scheduleTitle").innerText =
+t("Choose Date & Time", "Pumili ng Petsa at Oras");
+
+document.getElementById("scheduleDesc").innerText =
+t(
+  "Select your preferred appointment schedule",
+  "Piliin ang nais mong iskedyul ng appointment"
+);
+
+document.getElementById("timeTitle").innerText =
+t("⏰ Select Time", "⏰ Pumili ng Oras");
+
+document.getElementById("officeHours").innerText =
+t(
+  "Office Hours: 8:00 AM – 5:00 PM",
+  "Oras ng Opisina: 8:00 AM – 5:00 PM"
+);
+</script>
 </body>
 </html>
