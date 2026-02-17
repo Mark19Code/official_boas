@@ -4,7 +4,9 @@
 <meta charset="UTF-8">
 <title>Receipt</title>
 <link rel="stylesheet" href="style.css">
+<a href="index.html">
 <img src="brgy.png" alt="Barangay Connect Logo" class="logo fade-in">
+</a>
 </head>
 <body class="gradient-bg" onload="loadReceipt()">
     <div class="steps">
@@ -26,10 +28,8 @@
   <h2 id="receiptTitle"></h2>
 
 <div id="receiptDetails"></div>
-<p class="trust-text">
-Please bring this receipt when visiting the barangay office.
-This serves as your official appointment confirmation.
-</p>
+<h1 id="confirmTitle"></h1>
+<p class="trust-text" id="receiptNote"></p>
 
 
 <button onclick="window.print()" class="primary-btn">Print</button>
@@ -37,5 +37,15 @@ This serves as your official appointment confirmation.
 </div>
 
 <script src="script.js"></script>
+<script>
+document.getElementById("confirmTitle").innerText =
+t("Appointment Confirmed!", "Kumpirmado na ang Appointment!");
+
+document.getElementById("receiptNote").innerText =
+t(
+  "Please bring this receipt when visiting the barangay office.",
+  "Dalhin ang resibong ito sa pagpunta sa barangay."
+);
+</script>
 </body>
 </html>
