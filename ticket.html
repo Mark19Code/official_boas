@@ -4,7 +4,9 @@
 <meta charset="UTF-8">
 <title>Personal Info</title>
 <link rel="stylesheet" href="style.css">
+<a href="index.html">
 <img src="brgy.png" alt="Barangay Connect Logo" class="logo fade-in">
+</a>
 </head>
 <body class="gradient-bg ticket-page">
     <div class="steps">
@@ -19,11 +21,9 @@
 
 
 <div class="center-card fade-in">
-<h2>Personal Information</h2>
-<p class="intro-text">
-Please provide your basic details to process your barangay request accurately.
-Your information will be kept secure and confidential.
-</p>
+<h2 id="ticketTitle"></h2>
+<p class="intro-text" id="ticketDesc"></p>
+
 
 <form onsubmit="saveTicket(event)">
   <input type="text" id="name" placeholder="Full Name" required>
@@ -35,5 +35,28 @@ Your information will be kept secure and confidential.
 </div>
 
 <script src="script.js"></script>
+<script>
+document.getElementById("ticketTitle").innerText =
+t("Personal Information", "Personal na Impormasyon");
+
+document.getElementById("ticketDesc").innerText =
+t(
+  "Please provide your basic details to process your barangay request accurately.",
+  "Ilagay ang iyong pangunahing impormasyon para maproseso ang iyong request."
+);
+
+document.getElementById("name").placeholder =
+t("Full Name", "Buong Pangalan");
+
+document.getElementById("age").placeholder =
+t("Age", "Edad");
+
+document.getElementById("address").placeholder =
+t("Address", "Tirahan");
+
+document.getElementById("email").placeholder =
+t("Email Address", "Email Address");
+</script>
+
 </body>
 </html>
