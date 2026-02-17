@@ -2,66 +2,62 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Welcome</title>
+<title>Barangay Connect</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body class="gradient-bg">
- <a href="index.html">
+  <a href="index.html">
 <img src="brgy.png" alt="Barangay Connect Logo" class="logo fade-in">
 </a>
+<div class="center-card">
+    <h1 class="main-title" id="titleMain"></h1>
+<h2 class="subtitle" id="titleSub"></h2>
+<h3 class="subbody" id="chooseLang"></h3>
+<h4 class="body" id="chooseLangFil"></h4>
 
-<div class="center-card fade-in">
-  <h1 id="welcomeTitle">Welcome!</h1>
-  <h2 class="subtitle">Barangay Online Appointment System</h2>
+    <a href="welcome.html" class="lang-card" onclick="setLanguage('en')">
+      <div class="lang-left">
+        <img src="us.png" alt="US flag for English" class="flag" onerror="this.style.display='none'; this.nextSibling.style.display='block';">
+        <span style="display:none; font-size:26px; font-weight:800; color:#111827;">US</span> 
+      </div>
+      <div class="lang-middle">
+        <h3>English</h3>
+        <p>Continue in English</p>
+      </div>  
+      <div class="lang-right">›</div> 
+    </a>
 
-  <p class="intro-text" id="welcomeDesc">
-    Book your barangay appointments online. Fast, easy, and convenient for all residents.
-  </p>
+    <a href="welcome.html" class="lang-card" onclick="setLanguage('fil')">
+      <div class="lang-left">
+        <img src="ph.png" alt="Philippine Flag for Filipino" class="flag" onerror="this.style.display='none'; this.nextSibling.style.display='block';">
+        <span style="display:none; font-size:26px; font-weight:800; color:#111827;">PH</span> 
+      </div>
+      <div class="lang-middle">
+        <h3>Filipino</h3>
+        <p>Magpatuloy sa Filipino</p>
+      </div>
+      <div class="lang-right">›</div> 
+    </a>
 
-  <div class="features">
-    <div class="feature-box">
-      <h4>📅 Easy Scheduling</h4>
-      <p>Choose your preferred date and time.</p>
-    </div>
-
-    <div class="feature-box">
-      <h4>🚫 No Waiting</h4>
-      <p>Skip long lines at the barangay hall.</p>
-    </div>
-
-    <div class="feature-box">
-      <h4>⚡ Quick Process</h4>
-      <p>Get your documents faster and hassle-free.</p>
-    </div>
-    <div class="feature-box feature-interactive">
-  <h4>🔒 Secure</h4>
-  <p>Your information is protected and handled by the barangay.</p>
+    <p class="intro-text">
+    A fast and convenient way to book barangay services online.<br>
+    Official. Secure. Free for all residents.</p>
 </div>
-
-
-  </div>
-
-  <p class="trust-text">Secure • Official • Free Services</p>
-
-  <a href="ticket.html" class="primary-btn" id="startBtn"></a>
-</div>
-
 
 <script src="script.js"></script>
 <script>
-document.getElementById("welcomeTitle").innerText =
-t("Welcome!", "Maligayang Pagdating!");
+document.getElementById("titleMain").innerText =
+t("Barangay Online", "Barangay Online");
 
-document.getElementById("welcomeDesc").innerText =
-t(
-  "Book your barangay appointments online. Fast, easy, and convenient for all residents.",
-  "Mag-book ng appointment sa barangay online. Mabilis, madali, at maginhawa."
-);
+document.getElementById("titleSub").innerText =
+t("Appointment System", "Sistema ng Appointment");
 
-document.getElementById("startBtn").innerText =
-t("Start Appointment", "Simulan ang Appointment");
+document.getElementById("chooseLang").innerText =
+t("Choose Your Language", "Piliin ang Iyong Wika");
+
+document.getElementById("chooseLangFil").innerText =
+t("Select your preferred language", "Pumili ng nais na wika");
 </script>
 
-</script>
 </body>
 </html>
