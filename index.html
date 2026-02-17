@@ -6,14 +6,14 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body class="gradient-bg">
+  <a href="index.html">
 <img src="brgy.png" alt="Barangay Connect Logo" class="logo fade-in">
-
+</a>
 <div class="center-card">
-    <h1 class="main-title">Barangay Online</h1>
-    <h2 class="subtitle">Appointment System</h2>
-
-    <h3 class="subbody">Choose Your Language</h3>
-    <h4 class="body">Piliin ang iyong Wika</h4>
+    <h1 class="main-title" id="titleMain"></h1>
+<h2 class="subtitle" id="titleSub"></h2>
+<h3 class="subbody" id="chooseLang"></h3>
+<h4 class="body" id="chooseLangFil"></h4>
 
     <a href="welcome.html" class="lang-card" onclick="setLanguage('en')">
       <div class="lang-left">
@@ -45,5 +45,19 @@
 </div>
 
 <script src="script.js"></script>
+<script>
+document.getElementById("titleMain").innerText =
+t("Barangay Online", "Barangay Online");
+
+document.getElementById("titleSub").innerText =
+t("Appointment System", "Sistema ng Appointment");
+
+document.getElementById("chooseLang").innerText =
+t("Choose Your Language", "Piliin ang Iyong Wika");
+
+document.getElementById("chooseLangFil").innerText =
+t("Select your preferred language", "Pumili ng nais na wika");
+</script>
+
 </body>
 </html>
