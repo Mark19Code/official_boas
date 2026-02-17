@@ -6,7 +6,9 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body class="gradient-bg">
- <img src="brgy.png" alt="Barangay Connect Logo" class="logo fade-in">
+ <a href="index.html">
+<img src="brgy.png" alt="Barangay Connect Logo" class="logo fade-in">
+</a>
  <div class="steps">
   <div class="step done">✓</div>
   <div class="line"></div>
@@ -19,11 +21,8 @@
 
 
 <div class="center-card fade-in service-page">
-  <h2>Select Service</h2>
-  <p class="intro-text">
-    Choose the barangay service you need. Each request will be prepared
-    based on your selected document type.
-  </p>
+  <h2 id="serviceTitle"></h2>
+<p class="intro-text" id="serviceDesc"></p>
 
   <a href="schedule.html" class="service-card" onclick="selectService('Barangay Certificate','BC')">
     📄 Barangay Certificate
@@ -48,5 +47,15 @@
 
 
 <script src="script.js"></script>
+<script>
+document.getElementById("serviceTitle").innerText =
+t("Select Service", "Pumili ng Serbisyo");
+
+document.getElementById("serviceDesc").innerText =
+t(
+  "Choose the barangay service you need.",
+  "Piliin ang serbisyong kailangan mo sa barangay."
+);
+</script>
 </body>
 </html>
