@@ -1,74 +1,60 @@
-async function getBookedTimes(date) {
-  const res = await fetch(`http://localhost:3000/api/booked-times?date=${date}`);
-  return await res.json(); // returns ["10:00 AM", "2:00 PM"]
-}
-
 /* ================= LANGUAGE ================= */
 function setLanguage(lang){
   localStorage.setItem("language", lang);
-  window.location.href = "welcome.html";
 }
 
 function t(en, fil){
   return localStorage.getItem("language") === "fil" ? fil : en;
 }
 
-/* ================= TICKET ================= */
+/* ================= SAVE PERSONAL INFO ================= */
 function saveTicket(e){
   e.preventDefault();
-  console.log("DEBUG: saveTicket function started");
 
   const name = document.getElementById("name").value;
   const age = document.getElementById("age").value;
   const address = document.getElementById("address").value;
   const email = document.getElementById("email").value;
 
-  console.log("DEBUG: Form values - Name:", name, "Age:", age, "Address:", address, "Email:", email);
-
   if (!name || !age || !address || !email) {
     alert("Please fill in all fields");
-    console.log("DEBUG: Form validation failed - fields empty");
     return;
   }
 
   const user = { name, age, address, email };
   localStorage.setItem("userData", JSON.stringify(user));
-  console.log("DEBUG: User data saved to localStorage:", user);
   window.location.href = "service.html";
 }
 
-/* ================= SERVICE ================= */
+/* ================= SELECT SERVICE ================= */
 function selectService(service, prefix){
-  console.log("DEBUG: selectService called with service:", service);
   localStorage.setItem("serviceName", service);
   const id = prefix + Math.floor(1000 + Math.random() * 9000);
   localStorage.setItem("uniqueID", id);
-  console.log("DEBUG: Service and ID saved:", service, id);
 }
 
-/* ================= SCHEDULE ================= */
+/* ================= SCHEDULE PAGE ================= */
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("DEBUG: Schedule page loaded, initializing calendar and time slots");
+
   const calendar = document.getElementById("calendarDays");
   const timeGrid = document.getElementById("timeSlots");
   const monthLabel = document.getElementById("monthLabel");
   const nextBtn = document.querySelector(".next");
 
-  if(!calendar || !timeGrid || !nextBtn) {
-    console.log("DEBUG: Schedule elements missing, skipping initialization");
-    return;
-  }
+  if(!calendar || !timeGrid || !nextBtn) return;
 
   let selectedDate = null;
   let selectedTime = null;
+  let fullyBookedTimes = [];
 
-  /* ===== AUTO ADD NEXT 14 DAYS ===== */
   const today = new Date();
+
   monthLabel.textContent = today.toLocaleString("default", {
     month: "long",
     year: "numeric"
   });
 
+  // CREATE NEXT 14 DAYS
   for(let i = 0; i < 14; i++){
     const d = new Date();
     d.setDate(today.getDate() + i);
@@ -76,140 +62,116 @@ document.addEventListener("DOMContentLoaded", () => {
     const btn = document.createElement("button");
     btn.className = "day";
     btn.textContent = d.getDate();
-    btn.dataset.date = d.toDateString();
+    btn.dataset.date = d.toISOString().split("T")[0];
 
-   btn.onclick = async () => {
-  document.querySelectorAll(".day").forEach(b => b.classList.remove("selected"));
-  btn.classList.add("selected");
+    btn.onclick = async () => {
+      document.querySelectorAll(".day").forEach(b => b.classList.remove("selected"));
+      btn.classList.add("selected");
 
-  selectedDate = d.toISOString().split("T")[0];
-  console.log("DEBUG: Date selected:", selectedDate);
+      selectedDate = btn.dataset.date;
 
-  fullyBookedTimes = await getBookedTimes(selectedDate);
-  renderTimes();
-};
+      const res = await fetch(`http://localhost:3000/api/booked-times?date=${selectedDate}`);
+      fullyBookedTimes = await res.json();
 
+      renderTimes();
+    };
 
     calendar.appendChild(btn);
   }
 
-  /* ===== TIME SLOTS ===== */
-  let fullyBookedTimes = [];
+  function renderTimes() {
+    timeGrid.innerHTML = "";
 
+    for (let hour = 8; hour <= 17; hour++) {
+      const display = hour > 12 ? hour - 12 : hour;
+      const period = hour >= 12 ? "PM" : "AM";
+      const label = `${display}:00 ${period}`;
 
-  for(let hour = 8; hour <= 18; hour++){
-    const h = hour > 12 ? hour - 12 : hour;
-    const p = hour >= 12 ? "PM" : "AM";
-    const label = `${h}:00 ${p}`;
+      const btn = document.createElement("button");
+      btn.className = "time";
+      btn.textContent = label;
 
-    const btn = document.createElement("button");
-    btn.className = "time";
-    btn.textContent = label;
+      if (fullyBookedTimes.includes(label)) {
+        btn.classList.add("disabled");
+        btn.disabled = true;
+      } else {
+        btn.onclick = () => {
+          document.querySelectorAll(".time").forEach(t => t.classList.remove("selected"));
+          btn.classList.add("selected");
+          selectedTime = label;
+        };
+      }
 
-    if(fullyBooked.includes(label)){
-      btn.classList.add("disabled");
-      btn.disabled = true;
-    } else {
-      btn.onclick = () => {
-        document.querySelectorAll(".time").forEach(t => t.classList.remove("selected"));
-        btn.classList.add("selected");
-        selectedTime = label;
-        console.log("DEBUG: Time selected:", selectedTime);
-      };
+      timeGrid.appendChild(btn);
     }
-
-    timeGrid.appendChild(btn);
   }
 
-  /* ===== CONTINUE ===== */
- await fetch("http://localhost:3000/api/book", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({
-    name: user.name,
-    service,
-    date: selectedDate,
-    time: selectedTime
-  })
+  // CONTINUE BUTTON
+  nextBtn.onclick = async () => {
+
+    if (!selectedDate || !selectedTime) {
+      alert("Please select date and time");
+      return;
+    }
+
+    const user = JSON.parse(localStorage.getItem("userData"));
+    const service = localStorage.getItem("serviceName");
+
+    const res = await fetch("http://localhost:3000/api/book", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: user.name,
+        service,
+        date: selectedDate,
+        time: selectedTime
+      })
+    });
+
+    const data = await res.json();
+
+    if (!data.success) {
+      alert(data.message);
+      return;
+    }
+
+    localStorage.setItem("appointmentDate", selectedDate);
+    localStorage.setItem("appointmentTime", selectedTime);
+
+    window.location.href = "receipt.html";
+  };
 });
 
-
+/* ================= RECEIPT ================= */
 function loadReceipt(){
-  console.log("DEBUG: loadReceipt function started");
+
   const title = document.getElementById("receiptTitle");
   const details = document.getElementById("receiptDetails");
 
-  if (!title || !details) {
-    console.log("DEBUG: Receipt elements not found");
-    return;
-  }
+  if (!title || !details) return;
 
   const user = JSON.parse(localStorage.getItem("userData")) || {};
-  const service = localStorage.getItem("serviceName") || "Not selected";
-  const id = localStorage.getItem("uniqueID") || "Not generated";
-  const date = localStorage.getItem("appointmentDate") || "Not selected";
-  const time = localStorage.getItem("appointmentTime") || "Not selected";
+  const service = localStorage.getItem("serviceName");
+  const id = localStorage.getItem("uniqueID");
+  const date = localStorage.getItem("appointmentDate");
+  const time = localStorage.getItem("appointmentTime");
 
-  console.log("DEBUG: Retrieved data - User:", user, "Service:", service, "ID:", id, "Date:", date, "Time:", time);
-
-  title.innerText = t(
-    "Appointment Successful!",
-    "Matagumpay ang Appointment!"
-  );
+  title.innerText = "Appointment Successful!";
 
   details.innerHTML = `
     <p><strong>Tracking ID:</strong> ${id}</p>
     <p><strong>Service:</strong> ${service}</p>
     <hr>
-    <p><strong>Name:</strong> ${user.name || "Not provided"}</p>
-    <p><strong>Age:</strong> ${user.age || "Not provided"}</p>
-    <p><strong>Address:</strong> ${user.address || "Not provided"}</p>
-    <p><strong>Email:</strong> ${user.email || "Not provided"}</p>
+    <p><strong>Name:</strong> ${user.name}</p>
+    <p><strong>Age:</strong> ${user.age}</p>
+    <p><strong>Address:</strong> ${user.address}</p>
+    <p><strong>Email:</strong> ${user.email}</p>
     <hr>
     <p><strong>Date:</strong> ${date}</p>
     <p><strong>Time:</strong> ${time}</p>
   `;
 }
 
-function printReceipt(){
-  window.print();
-}
-
 function newBooking(){
   localStorage.clear();
-  console.log("DEBUG: localStorage cleared");
-}
-
-function renderTimes() {
-  timeGrid.innerHTML = "";
-
-  for (let hour = 8; hour <= 17; hour++) {
-    const display = hour > 12 ? hour - 12 : hour;
-    const period = hour >= 12 ? "PM" : "AM";
-    const label = `${display}:00 ${period}`;
-
-    const btn = document.createElement("button");
-    btn.className = "time";
-    btn.textContent = label;
-
-    if (fullyBookedTimes.includes(label)) {
-      btn.classList.add("disabled");
-      btn.disabled = true;
-    } else {
-      btn.onclick = () => {
-        document.querySelectorAll(".time").forEach(t => t.classList.remove("selected"));
-        btn.classList.add("selected");
-        selectedTime = label;
-      };
-    }
-
-    timeGrid.appendChild(btn);
-  }
-}
-
-async function getBookedTimes(date) {
-  const res = await fetch(
-    `http://localhost:3000/api/booked-times?date=${date}`
-  );
-  return await res.json();
 }
