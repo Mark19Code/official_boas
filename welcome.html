@@ -6,7 +6,9 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body class="gradient-bg">
- <img src="brgy.png" alt="Barangay Connect Logo" class="logo fade-in">
+ <a href="index.html">
+<img src="brgy.png" alt="Barangay Connect Logo" class="logo fade-in">
+</a>
 
 <div class="center-card fade-in">
   <h1 id="welcomeTitle">Welcome!</h1>
@@ -41,19 +43,25 @@
 
   <p class="trust-text">Secure • Official • Free Services</p>
 
-  <a href="ticket.html" class="primary-btn">Start Appointment</a>
+  <a href="ticket.html" class="primary-btn" id="startBtn"></a>
 </div>
 
 
 <script src="script.js"></script>
 <script>
 document.getElementById("welcomeTitle").innerText =
-t("Welcome to Barangay Connect",
-  "Maligayang Pagdating sa Barangay Connect");
+t("Welcome!", "Maligayang Pagdating!");
 
 document.getElementById("welcomeDesc").innerText =
-t("Book your barangay services online easily.",
-  "Mag-book ng serbisyo ng barangay online nang madali.");
+t(
+  "Book your barangay appointments online. Fast, easy, and convenient for all residents.",
+  "Mag-book ng appointment sa barangay online. Mabilis, madali, at maginhawa."
+);
+
+document.getElementById("startBtn").innerText =
+t("Start Appointment", "Simulan ang Appointment");
+</script>
+
 </script>
 </body>
 </html>
