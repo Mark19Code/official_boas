@@ -611,11 +611,19 @@ to {opacity: 1; transform: translateY(0);}
   }
 
   /* LOGO */
+  @media (max-width: 768px) {
+
   .logo {
-    position: static;
-    margin: 20px auto 10px;
+    position: sticky;
+    top: 20px;
+    z-index: 1000;
+    margin: 10px auto 15px;
     display: block;
-    width: 80px;
+    width: 70px;
+    background: rgba(0,0,0,0.4);
+    backdrop-filter: blur(8px);
+    border-radius: 50%;
+    padding: 6px;
   }
 
   /* STEPS (progress bar) */
@@ -685,10 +693,13 @@ to {opacity: 1; transform: translateY(0);}
   /* ================= SCHEDULE PAGE ================= */
 
   .schedule-container {
-    transform: none;
-    width: 100%;
-    padding: 0 10px;
-  }
+  width: 100%;
+  min-height: 100vh;
+  padding: 16px;
+  transform: none;
+  position: static;
+}
+
 
   .schedule-wrapper {
     flex-direction: column;
@@ -741,5 +752,110 @@ to {opacity: 1; transform: translateY(0);}
 
   #receiptDetails p {
     font-size: 14px;
+  }
+}
+
+
+.header-text h1 {
+  font-size: 24px;
+  line-height: 1.3;
+}
+
+.header-text p {
+  font-size: 14px;
+  opacity: 0.85;
+}
+
+
+.calendar {
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.day {
+  padding: 16px 0;
+  font-size: 15px;
+  border-radius: 14px;
+}
+
+.time-grid {
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.time {
+  padding: 16px 0;
+  font-size: 15px;
+  border-radius: 14px;
+}
+
+
+.actions {
+  position: sticky;
+  bottom: 10px;
+  background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+  padding: 12px;
+  gap: 10px;
+}
+
+.actions .btn {
+  padding: 16px;
+  font-size: 16px;
+  border-radius: 16px;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ================= MOBILE HEADER FIX ================= */
+@media (max-width: 768px) {
+
+  /* ================= LOGO ================= */
+  .logo {
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    width: 60px;
+    margin: 0;
+    transform: none;
+    z-index: 2000;
+
+
+    background: rgba(255,255,255,0.6);
+    backdrop-filter: blur(6px);
+    border-radius: 50%;
+    padding: 6px;
+  }
+
+ 
+  .steps {
+    position: fixed;
+    top: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+    margin: 0;
+    z-index: 1900;
+  }
+
+  .line {
+    width: 20px;
+  }
+
+  body {
+    padding-top: 90px; 
+    overflow-x: hidden;
+  }
+
+  
+  .center-card,
+  .schedule-container,
+  .service-page {
+    margin-top: 20px;
   }
 }
