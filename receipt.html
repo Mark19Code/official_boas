@@ -4,12 +4,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Receipt</title>
 <link rel="stylesheet" href="style.css">
-<a href="index.html">
-<img src="brgy.png" alt="Barangay Connect Logo" class="logo fade-in">
-</a>
 </head>
+
 <body class="gradient-bg" onload="loadReceipt()">
-    <div class="steps">
+
+<!-- LOGO MUST BE IN BODY -->
+<a href="index.html">
+  <img src="brgy.png" alt="Barangay Connect Logo" class="logo fade-in">
+</a>
+
+<div class="steps">
   <div class="step done">✓</div>
   <div class="line"></div>
   <div class="step done">✓</div>
@@ -19,25 +23,43 @@
   <div class="step">4</div>
 </div>
 
-
 <div class="center-card fade-in" style="position: relative;">
 
-  <!-- FLOATING SUCCESS -->
   <img src="confirmed.png" class="confirmed-icon">
- <h1>Appointment Confirmed!</h1>
+
+  <h1>Appointment Confirmed!</h1>
   <h2 id="receiptTitle"></h2>
 
-<div id="receiptDetails"></div>
-<h1 id="confirmTitle"></h1>
-<p class="trust-text" id="receiptNote"></p>
+  <div id="receiptDetails"></div>
 
+  <h1 id="confirmTitle"></h1>
+  <p class="trust-text" id="receiptNote"></p>
 
-<button onclick="window.print()" class="primary-btn">Print</button>
-<a href="index.html" onclick="newBooking()" class="secondary-btn">New Appointment</a>
+  <!-- ✅ MOBILE-SAFE BUTTON -->
+  <button type="button" id="printBtn" class="primary-btn">
+    Print / Save Receipt
+  </button>
+
+  <a href="index.html" class="secondary-btn">New Appointment</a>
+
+  <!-- MOBILE NOTE -->
+  <p style="font-size:13px; opacity:.7; margin-top:10px;">
+    📱 Mobile users: tap the browser menu (⋮) → Print → Save as PDF
+  </p>
+
 </div>
 
 <script src="script.js"></script>
+
 <script>
+document.getElementById("printBtn").addEventListener("click", function () {
+  if (/Mobi|Android/i.test(navigator.userAgent)) {
+    alert("Mobile browser restriction.\nTap browser menu (⋮) → Print → Save as PDF.");
+  } else {
+    window.print();
+  }
+});
+
 document.getElementById("confirmTitle").innerText =
 t("Appointment Confirmed!", "Kumpirmado na ang Appointment!");
 
@@ -47,5 +69,6 @@ t(
   "Dalhin ang resibong ito sa pagpunta sa barangay."
 );
 </script>
+
 </body>
 </html>
