@@ -13,6 +13,7 @@ font-family: Arial, sans-serif;
 }
 
 .gradient-bg {
+  background: linear-gradient(to right, #f1f1f1, #ebd6d6);
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -24,7 +25,7 @@ color: #970202;
 }
 
 .center-card {
-  background: #f1f1f1;  
+  background: linear-gradient(to left, #f8f8f8, #ebc7ca);
   padding: 32px;
   border-radius: 28px;
 
