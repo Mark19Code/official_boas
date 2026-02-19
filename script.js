@@ -65,16 +65,22 @@ document.addEventListener("DOMContentLoaded", () => {
     btn.dataset.date = d.toISOString().split("T")[0];
 
     btn.onclick = async () => {
-      document.querySelectorAll(".day").forEach(b => b.classList.remove("selected"));
-      btn.classList.add("selected");
+  document.querySelectorAll(".day").forEach(b => b.classList.remove("selected"));
+  btn.classList.add("selected");
 
-      selectedDate = btn.dataset.date;
+  selectedDate = btn.dataset.date;
 
-      const res = await fetch(`http://localhost:3000/api/booked-times?date=${selectedDate}`);
-      fullyBookedTimes = await res.json();
+  try {
+    const res = await fetch(`http://localhost:3000/api/booked-times?date=${selectedDate}`);
+    fullyBookedTimes = await res.json();
+  } catch (err) {
+    console.error("Server not running, allowing all times");
+    fullyBookedTimes = [];
+  }
 
-      renderTimes();
-    };
+  renderTimes();
+};
+
 
     calendar.appendChild(btn);
   }
@@ -82,7 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function renderTimes() {
     timeGrid.innerHTML = "";
 
-    for (let hour = 8; hour <= 17; hour++) {
+    for (let hour = 8; hour <= 18; hour++) {
       const display = hour > 12 ? hour - 12 : hour;
       const period = hour >= 12 ? "PM" : "AM";
       const label = `${display}:00 ${period}`;
