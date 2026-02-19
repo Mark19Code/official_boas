@@ -838,3 +838,137 @@ html, body {
     touch-action: manipulation;
   }
 }
+
+/* ===================================================
+   GLOBAL MOBILE CONSISTENCY (ALL PAGES)
+   =================================================== */
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* -------- MOBILE FIRST -------- */
+@media (max-width: 768px) {
+
+  /* PAGE BACKGROUND */
+  .gradient-bg {
+    min-height: 100vh !important;
+    height: auto !important;
+    padding: 95px 14px 40px !important;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+  }
+
+  /* LOGO */
+  .logo {
+    width: 52px !important;
+    top: 14px !important;
+    left: 14px !important;
+    position: fixed !important;
+    z-index: 10;
+  }
+
+  /* STEPS */
+  .steps {
+    width: auto !important;
+    max-width: 90vw;
+    position: fixed !important;
+    top: 18px !important;
+    left: 50%;
+    transform: translateX(-50%);
+    gap: 6px;
+    z-index: 9;
+  }
+
+  .step {
+    width: 30px;
+    height: 30px;
+    font-size: 13px;
+  }
+
+  .line {
+    width: 14px !important;
+  }
+
+  /* HEADER TEXT (ALL PAGES FIX) */
+  .header-text {
+    position: relative !important;
+    top: 0 !important;
+    left: 0 !important;
+    transform: none !important;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  /* MAIN CARD (UNIFIED) */
+  .center-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 22px 16px !important;
+    border-radius: 26px;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+
+  /* TEXT SCALE */
+  h1 { font-size: 22px !important; }
+  h2 { font-size: 16px !important; }
+  h3 { font-size: 15px !important; }
+  p  { font-size: 14px !important; }
+
+  /* LANGUAGE & SERVICE CARDS */
+  .lang-card,
+  .service-card {
+    width: 100% !important;
+    margin: 10px 0 !important;
+    box-sizing: border-box;
+  }
+
+  /* SCHEDULE PAGE */
+  .schedule-wrapper {
+    flex-direction: column !important;
+    gap: 16px;
+    width: 100%;
+  }
+
+  .card {
+    width: 100% !important;
+    padding: 16px !important;
+    box-sizing: border-box;
+  }
+
+  .calendar {
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 8px;
+  }
+
+  .time-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px;
+  }
+
+  /* ACTION BUTTONS (ALL PAGES) */
+  .actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 30px;
+  }
+
+  .btn {
+    flex: 1;
+    padding: 14px !important;
+    font-size: 15px;
+  }
+
+  .next {
+    margin-left: 0 !important;
+  }
+
+  /* TOUCH FRIENDLY */
+  button,
+  a {
+    touch-action: manipulation;
+  }
+}
