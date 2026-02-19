@@ -601,3 +601,145 @@ to {opacity: 1; transform: translateY(0);}
         transform: translateY(-10px);
     }
 }
+
+/* ================= MOBILE POV FIX ================= */
+@media (max-width: 768px) {
+
+  /* BODY */
+  body {
+    overflow-x: hidden;
+  }
+
+  /* LOGO */
+  .logo {
+    position: static;
+    margin: 20px auto 10px;
+    display: block;
+    width: 80px;
+  }
+
+  /* STEPS (progress bar) */
+  .steps {
+    position: static;
+    transform: none;
+    width: 100%;
+    margin: 10px auto 20px;
+    justify-content: center;
+  }
+
+  .line {
+    width: 24px;
+  }
+
+  /* CENTER CARD */
+  .center-card {
+    width: 92%;
+    max-width: none;
+    padding: 20px;
+    border-radius: 20px;
+  }
+
+  /* TITLES */
+  .main-title {
+    font-size: 22px;
+  }
+
+  .subtitle {
+    font-size: 15px;
+    margin-bottom: 20px;
+  }
+
+  /* LANGUAGE CARDS */
+  .lang-card {
+    padding: 14px;
+    gap: 12px;
+  }
+
+  .lang-middle h3 {
+    font-size: 16px;
+  }
+
+  .lang-middle p {
+    font-size: 13px;
+  }
+
+  /* WELCOME PAGE BUTTON */
+  .primary-btn {
+    width: 100%;
+    padding: 14px;
+    font-size: 15px;
+  }
+
+  /* FEATURES */
+  .features {
+    grid-template-columns: 1fr;
+  }
+
+  /* SERVICE PAGE */
+  .service-page .service-card {
+    width: 100%;
+    font-size: 14px;
+    padding: 14px;
+  }
+
+  /* ================= SCHEDULE PAGE ================= */
+
+  .schedule-container {
+    transform: none;
+    width: 100%;
+    padding: 0 10px;
+  }
+
+  .schedule-wrapper {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .card {
+    width: 100%;
+    padding: 18px;
+  }
+
+  .calendar {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .time-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .day,
+  .time {
+    padding: 14px;
+    font-size: 14px;
+  }
+
+  /* HEADER TEXT SA SCHEDULE */
+  .header-text {
+    position: static;
+    transform: none;
+    margin-bottom: 20px;
+  }
+
+  /* ACTION BUTTONS */
+  .actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 25px;
+  }
+
+  .actions .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* RECEIPT PAGE */
+  .confirmed-icon {
+    width: 80px;
+  }
+
+  #receiptDetails p {
+    font-size: 14px;
+  }
+}
