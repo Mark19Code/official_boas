@@ -34,6 +34,7 @@ function selectService(service, prefix){
 }
 
 /* ================= SCHEDULE PAGE ================= */
+/* ================= SCHEDULE PAGE ================= */
 document.addEventListener("DOMContentLoaded", () => {
 
   const calendar = document.getElementById("calendarDays");
@@ -112,8 +113,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // CONTINUE BUTTON
-  nextBtn.onclick = async () => {
+    // CONTINUE BUTTON
+  nextBtn.onclick = async (e) => {
+
+    e.preventDefault(); 
 
     if (!selectedDate || !selectedTime) {
       alert("Please select date and time");
@@ -123,22 +126,28 @@ document.addEventListener("DOMContentLoaded", () => {
     const user = JSON.parse(localStorage.getItem("userData"));
     const service = localStorage.getItem("serviceName");
 
-    const res = await fetch("http://localhost:3000/api/book", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        name: user.name,
-        service,
-        date: selectedDate,
-        time: selectedTime
-      })
-    });
+    
+    try {
+      const res = await fetch("http://localhost:3000/api/book", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: user.name,
+          service,
+          date: selectedDate,
+          time: selectedTime
+        })
+      });
 
-    const data = await res.json();
+      const data = await res.json();
 
-    if (!data.success) {
-      alert(data.message);
-      return;
+      if (!data.success) {
+        alert(data.message);
+        return;
+      }
+    } catch (err) {
+      console.error("Server error (ignored):", err);
+  
     }
 
     localStorage.setItem("appointmentDate", selectedDate);
